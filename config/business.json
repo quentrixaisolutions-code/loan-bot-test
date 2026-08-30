@@ -1,0 +1,62 @@
+{
+  "businessName": "QuiBot Loans",
+  "tagline": "Fast, simple loans in Jamaica",
+  "currency": "JMD",
+  "timezone": "America/Jamaica",
+
+  "businessHours": {
+    "monday":    { "open": "09:00", "close": "17:00" },
+    "tuesday":   { "open": "09:00", "close": "17:00" },
+    "wednesday": { "open": "09:00", "close": "17:00" },
+    "thursday":  { "open": "09:00", "close": "17:00" },
+    "friday":    { "open": "09:00", "close": "17:00" },
+    "saturday":  { "open": "09:00", "close": "13:00" },
+    "sunday":    null
+  },
+  "afterHoursMessage": "Our team is currently offline. We'll reply on the next business day. You can still ask questions or start a loan application now and a representative will follow up.",
+
+  "loanTypes": [
+    "Personal loans",
+    "Short-term / payday loans",
+    "Small business loans"
+  ],
+  "amountRange": {
+    "min": 10000,
+    "max": 500000,
+    "note": "JMD $10,000 to JMD $500,000"
+  },
+  "interestAndFees": "Interest starts at 3.5% per month. The exact rate and fees vary by loan type and repayment term.",
+  "requirements": [
+    "Valid government-issued ID",
+    "Proof of income (a recent pay slip or bank statement)",
+    "Must be 18 years or older",
+    "No collateral required for loans under JMD $100,000"
+  ],
+  "repaymentTerms": "Repay weekly or monthly, with terms from 3 to 24 months.",
+  "howToApply": "Share your full name, ID number, monthly income, and the loan amount you need. A representative reviews it and follows up.",
+  "leadFieldsToCollect": [
+    "full name",
+    "phone number",
+    "loan amount needed",
+    "reason for the loan"
+  ],
+  "approvalTime": "Same-day approval for most applications. Approved funds are disbursed within 24 hours.",
+
+  "faq": [
+    {
+      "q": "Do I need collateral?",
+      "a": "No collateral is needed for loans under JMD $100,000. Larger loans may require collateral depending on the loan type."
+    },
+    {
+      "q": "How fast can I get the money?",
+      "a": "Most applications are approved the same day, and approved funds are sent out within 24 hours."
+    },
+    {
+      "q": "What documents do I need?",
+      "a": "A valid government ID and proof of income (a recent pay slip or bank statement). You must be 18 or older."
+    }
+  ],
+
+  "escalationMessage": "Thanks! I've passed your details to our loan team. A representative will contact you shortly during business hours to continue your application.",
+  "toneGuidelines": "Warm, clear, and professional. Use plain language. Keep replies short enough to read comfortably on WhatsApp (usually 2-5 sentences). Never promise approval or a specific rate - those depend on review."
+}

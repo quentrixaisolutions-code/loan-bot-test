@@ -1,0 +1,23 @@
+{
+  "name": "whatsapp-loan-bot",
+  "version": "1.0.0",
+  "description": "WhatsApp chatbot for a loan business: answers FAQs with Claude and captures loan-application leads.",
+  "main": "src/index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.122.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "twilio": "^6.1.0"
+  }
+}
