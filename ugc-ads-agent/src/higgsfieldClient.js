@@ -147,7 +147,9 @@ export async function getGenerationStatus(job) {
       return { state: "processing", raw: { dryRun: true } };
     }
     const seed = encodeURIComponent(job.requestId.slice(-6));
-    const placeholderUrl = `https://placehold.co/720x1280/111827/ffffff?text=DRY-RUN%0A${seed}`;
+    // .png explicitly - placehold.co serves SVG by default, which Claude's
+    // vision input rejects (only jpeg/png/gif/webp are accepted).
+    const placeholderUrl = `https://placehold.co/720x1280/111827/ffffff.png?text=DRY-RUN%0A${seed}`;
     return {
       state: "completed",
       mediaUrl: placeholderUrl,

@@ -17,6 +17,7 @@ const PROPOSE_CONCEPTS_TOOL = {
   name: "propose_concepts",
   description:
     "Propose a set of distinct UGC-style ad concepts for the given product brief.",
+  strict: true,
   input_schema: {
     type: "object",
     properties: {
@@ -97,6 +98,7 @@ const PROPOSE_CONCEPTS_TOOL = {
 const SUBMIT_REVIEW_TOOL = {
   name: "submit_review",
   description: "Submit your review verdict for one generated ad variant.",
+  strict: true,
   input_schema: {
     type: "object",
     properties: {
@@ -169,18 +171,31 @@ Call propose_concepts exactly once with all ${numVariants} concepts.`;
 
   const block = response.content.find((b) => b.type === "tool_use");
   if (!block) throw new Error("Claude did not return concepts (no tool_use block).");
-  return block.input.concepts;
+  let { concepts } = block.input;
+  // Defensive: `strict: true` should guarantee a real array, but tool-use
+  // input has been observed coming back as a JSON string instead - parse it
+  // rather than let a rare model hiccup crash campaign creation.
+  if (typeof concepts === "string") {
+    concepts = JSON.parse(concepts).concepts;
+  }
+  if (!Array.isArray(concepts)) throw new Error("Claude's propose_concepts response had no concepts array.");
+  return concepts;
 }
+
+// Claude's vision input only accepts these four raster types - anything else
+// (notably image/svg+xml, which some placeholder/thumbnail services serve by
+// default) must be skipped rather than sent, or the API call 400s.
+const VISION_MEDIA_TYPES = new Set(["image/jpeg", "image/png", "image/gif", "image/webp"]);
 
 async function fetchImageBase64(url) {
   try {
     const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
     if (!res.ok) return null;
-    const contentType = res.headers.get("content-type") || "";
-    if (!contentType.startsWith("image/")) return null; // e.g. a video url - skip vision
+    const mediaType = (res.headers.get("content-type") || "").split(";")[0].trim();
+    if (!VISION_MEDIA_TYPES.has(mediaType)) return null; // e.g. a video, or svg - skip vision
     const buf = Buffer.from(await res.arrayBuffer());
     if (buf.byteLength > 8 * 1024 * 1024) return null; // keep the review call cheap
-    return { data: buf.toString("base64"), mediaType: contentType.split(";")[0] };
+    return { data: buf.toString("base64"), mediaType };
   } catch {
     return null;
   }
