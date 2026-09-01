@@ -1,0 +1,22 @@
+{
+  "name": "ugc-ads-agent",
+  "version": "1.0.0",
+  "description": "UGC-style ad generation agent: Claude writes the concepts/scripts, Higgsfield renders the video/image, Claude reviews the output and can revise-and-regenerate.",
+  "main": "src/server.js",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.122.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  }
+}

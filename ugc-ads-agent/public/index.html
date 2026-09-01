@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>UGC Ads Agent</title>
+<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>UGC Ads Agent</h1>
+    <div id="statusBanner" class="banner" hidden></div>
+  </header>
+
+  <main>
+    <section class="panel new-campaign">
+      <h2>New campaign</h2>
+      <form id="briefForm">
+        <label>Product / brand name
+          <input name="productName" required placeholder="e.g. GlowDrop Vitamin C Serum" />
+        </label>
+        <label>Description
+          <textarea name="description" required rows="3"
+            placeholder="What is it, what does it do, what makes it different?"></textarea>
+        </label>
+        <label>Target audience
+          <input name="audience" required placeholder="e.g. women 25-40 into skincare" />
+        </label>
+        <label>Key selling points
+          <input name="keySellingPoints" placeholder="e.g. clinically tested, cruelty-free, visible results in 2 weeks" />
+        </label>
+        <label>Tone
+          <input name="tone" placeholder="e.g. friendly, funny, girl-next-door honest" />
+        </label>
+        <label>Call to action
+          <input name="cta" placeholder="e.g. Link in bio - 20% off today" />
+        </label>
+        <label>Reference / product image URL (optional)
+          <input name="referenceImageUrl" type="url" placeholder="https://..." />
+        </label>
+        <div class="row">
+          <label>Aspect ratio
+            <select name="aspectRatio">
+              <option value="9:16" selected>9:16 (Reels/TikTok)</option>
+              <option value="1:1">1:1</option>
+              <option value="16:9">16:9</option>
+            </select>
+          </label>
+          <label># of variants
+            <input name="numVariants" type="number" min="1" max="6" value="3" />
+          </label>
+        </div>
+        <button type="submit">Generate concepts &amp; ads</button>
+      </form>
+      <p id="formError" class="error" hidden></p>
+    </section>
+
+    <section class="panel campaigns">
+      <h2>Campaigns</h2>
+      <ul id="campaignList" class="campaign-list"></ul>
+    </section>
+
+    <section class="panel detail" id="detail" hidden>
+      <h2 id="detailTitle"></h2>
+      <div id="variantGrid" class="variant-grid"></div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
